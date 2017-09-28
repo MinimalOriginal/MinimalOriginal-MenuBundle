@@ -1,0 +1,14 @@
+services:
+  minimal_manager.module.menu:
+      class: MinimalOriginal\MenuBundle\MinimalModule
+      tags: [minimal_manager.module]
+      arguments: ['@doctrine.orm.entity_manager']
+
+  minimal_menu.menu_builder:
+      class: MinimalOriginal\MenuBundle\Menu\MenuBuilder
+      arguments: ["@knp_menu.factory"]
+      calls:
+        - [setContainer, ["@service_container"]]
+        - [setModuleList, ["@minimal_manager.module_list"]]
+      tags:
+          - { name: knp_menu.menu_builder, method: createMenu, alias: minimal_menu }

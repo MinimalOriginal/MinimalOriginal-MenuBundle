@@ -1,0 +1,20 @@
+{
+    "name": "minimaloriginal/menu-bundle",
+    "description" : "The menu bundle for Minimal",
+    "type" : "symfony-bundle",
+    "keywords" : [
+        "menu bundle"
+    ],
+    "license" : [
+        "MIT"
+    ],
+    "require" : {
+        "php": ">=5.5.9",
+        "symfony/symfony": "3.3.*",
+        "stof/doctrine-extensions-bundle": "^1.2",
+        "minimaloriginal/core-bundle": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "MinimalOriginal\\MenuBundle\\": "src/" }
+    }
+}
