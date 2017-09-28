@@ -39,7 +39,7 @@ class MenuBuilder implements ContainerAwareInterface
         ->setChildrenAttribute('data-dropdown-menu', true);
 
         if( true === isset($options['root']) ){
-          if( null !== ($menu = $repo->findOneByTitle($options['root'])) ){
+          if( null !== ($menu = $repo->findOneBySlug($options['root'])) ){
 
             foreach( $menu->getChildren() as $child ){
               if( null !== ($routing = $child->getRouting()) ){

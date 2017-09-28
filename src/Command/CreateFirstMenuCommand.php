@@ -27,10 +27,15 @@ class CreateFirstMenuCommand extends ContainerAwareCommand
         ]);
         $doctrine = $this->getContainer()->get('doctrine');
         $em = $doctrine->getManager();
-        $menu = new Menu();
-        $menu->setTitle("Menu principal");
+        
+        $menu_pricipal = new Menu();
+        $menu_pricipal->setTitle("Menu principal");
+        $em->persist($menu_pricipal);
 
-        $em->persist($menu);
+        $menu_footer = new Menu();
+        $menu_footer->setTitle("Footer");
+        $em->persist($menu_footer);
+
         $em->flush();
 
         $output->writeln('The first menu has been successfully generated!');

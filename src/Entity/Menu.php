@@ -34,6 +34,15 @@ class Menu
     private $title;
 
     /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"title"}, updatable=false, separator="-")
+     *
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     */
+    private $slug;
+
+    /**
      * @ORM\ManyToOne(targetEntity="MinimalOriginal\CoreBundle\Entity\Routing")
      * @ORM\JoinColumn(name="routing_id", referencedColumnName="id", nullable=true)
      */
@@ -140,6 +149,30 @@ class Menu
           return $this->getRouting()->__toString();
         }
         return $this->title;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Menu
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**
