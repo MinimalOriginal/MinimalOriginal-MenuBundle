@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 
 use MinimalOriginal\CoreBundle\Entity\Routing;
+use MinimalOriginal\CoreBundle\Annotation\Exposure;
 
 /**
  * Menu
@@ -29,6 +30,7 @@ class Menu
     /**
      * @var string
      *
+     * @Exposure(groups = {"manager"}, name = "Titre")
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;

@@ -3,7 +3,6 @@
 namespace MinimalOriginal\MenuBundle;
 
 use MinimalOriginal\CoreBundle\Modules\ModuleInterface;
-use Doctrine\ORM\EntityManager;
 
 use MinimalOriginal\MenuBundle\Form\MenuType;
 use MinimalOriginal\MenuBundle\Entity\Menu;
@@ -11,13 +10,6 @@ use MinimalOriginal\MenuBundle\Entity\Menu;
 class MinimalModule implements ModuleInterface{
 
   private $moduleList;
-
-  protected $em;
-
-  public function __construct(EntityManager $em)
-  {
-      $this->em = $em;
-  }
 
   /**
    * {@inheritdoc}

@@ -43,8 +43,10 @@ class MenuBuilder implements ContainerAwareInterface
 
             foreach( $menu->getChildren() as $child ){
               if( null !== ($routing = $child->getRouting()) ){
-                $route = $this->moduleList->getRouteForEntity($routing->getObject(), $routing->getEntity());
-                $rootMenu->addChild($child->getTitle(),$route);
+                $rootMenu->addChild($routing->getTitle(),array(
+                  'route' => $routing->getRoute(),
+                  'routeParameters' => $routing->getRouteParams(),
+                ));
               }elseif( null !== $child->getUrl() ){
                 $rootMenu->addChild($child->getTitle(),$child->getUrl());
               }else{

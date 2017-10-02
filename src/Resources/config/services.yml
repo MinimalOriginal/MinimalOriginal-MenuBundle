@@ -2,7 +2,6 @@ services:
   minimal_manager.module.menu:
       class: MinimalOriginal\MenuBundle\MinimalModule
       tags: [minimal_manager.module]
-      arguments: ['@doctrine.orm.entity_manager']
 
   minimal_menu.menu_builder:
       class: MinimalOriginal\MenuBundle\Menu\MenuBuilder
