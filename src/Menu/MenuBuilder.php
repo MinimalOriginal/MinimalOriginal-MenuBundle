@@ -43,7 +43,7 @@ class MenuBuilder implements ContainerAwareInterface
 
             foreach( $menu->getChildren() as $child ){
               if( null !== ($routing = $child->getRouting()) ){
-                $rootMenu->addChild($routing->getTitle(),array(
+                $rootMenu->addChild($child->getTitle(),array(
                   'route' => $routing->getRoute(),
                   'routeParameters' => $routing->getRouteParams(),
                 ));
