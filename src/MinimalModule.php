@@ -2,34 +2,22 @@
 
 namespace MinimalOriginal\MenuBundle;
 
-use MinimalOriginal\CoreBundle\Modules\ModuleInterface;
+use MinimalOriginal\CoreBundle\Modules\AbstractManageableModule;
 
 use MinimalOriginal\MenuBundle\Form\MenuType;
 use MinimalOriginal\MenuBundle\Entity\Menu;
 
-class MinimalModule implements ModuleInterface{
-
-  private $moduleList;
+class MinimalModule extends AbstractManageableModule{
 
   /**
    * {@inheritdoc}
    */
-  public function getName(){
-    return 'menu';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getTitle(){
-    return "Menus";
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getDescription(){
-    return "Créez ou modifiez les menus de votre site.";
+  public function init(){
+    $this->informations->set('name', 'menu');
+    $this->informations->set('title', 'Menus');
+    $this->informations->set('description', "Créez ou modifiez les menus de votre site.");
+    $this->informations->set('icon', "ion-ios-list-outline");
+    return $this;
   }
 
   /**

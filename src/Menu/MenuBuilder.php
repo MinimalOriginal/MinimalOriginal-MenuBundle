@@ -3,6 +3,10 @@
 namespace MinimalOriginal\MenuBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
+use Knp\Menu\ItemInterface;
+
+use Doctrine\Common\Collections\Collection;
+
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
@@ -40,24 +44,30 @@ class MenuBuilder implements ContainerAwareInterface
 
         if( true === isset($options['root']) ){
           if( null !== ($menu = $repo->findOneBySlug($options['root'])) ){
-
-            foreach( $menu->getChildren() as $child ){
-              if( null !== ($routing = $child->getRouting()) ){
-                $rootMenu->addChild($child->getTitle(),array(
-                  'route' => $routing->getRoute(),
-                  'routeParameters' => $routing->getRouteParams(),
-                ));
-              }elseif( null !== $child->getUrl() ){
-                $rootMenu->addChild($child->getTitle(),$child->getUrl());
-              }else{
-                Continue;
-              }
-
-            }
-
+            $this->addChildren($rootMenu, $menu->getChildren());
           }
         }
 
         return $rootMenu;
+    }
+    protected function addChildren(ItemInterface $menu, Collection $children){
+
+      foreach( $children as $child ){
+        if( null !== ($routing = $child->getRouting()) ){
+          $children_menu = $menu->addChild($child->getTitle(),array(
+            'route' => $routing->getRoute(),
+            'routeParameters' => $routing->getRouteParams(),
+          ));
+        }elseif( null !== $child->getUrl() ){
+          $children_menu = $menu->addChild($child->getTitle(),$child->getUrl());
+        }else{
+          Continue;
+        }
+        if( null !== $child->getChildren() && $child->getChildren()->count() > 0 ){
+          $this->addChildren($children_menu, $child->getChildren());
+        }
+
+      }
+
     }
 }
